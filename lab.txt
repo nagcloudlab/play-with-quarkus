@@ -1,0 +1,43 @@
+
+
+
+----------------------------------------------------
+
+# install docker
+
+ docker --version
+
+# install java
+
+ java --version
+
+# install maven
+
+ mvn --version   
+
+# install graalVM
+
+  --> download graalVM zip file & extract it
+
+     export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home
+     export PATH=$PATH:$GRAALVM_HOME
+
+    > $GRAALVM_HOME/bin/gu install native-image
+
+----------------------------------------------------    
+
+create quarkus appln
+
+> mvn io.quarkus:quarkus-maven-plugin:1.7.0.Final:create
+
+> mvn quarkus:dev
+
+> mvn test
+
+> mvn packgae -Pnative  
+
+> mvn package -Dquarkus.native.container-runtime=docker -Pnative  
+
+
+
+
