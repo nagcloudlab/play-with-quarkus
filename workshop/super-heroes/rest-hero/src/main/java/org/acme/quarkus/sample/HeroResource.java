@@ -1,5 +1,9 @@
 package org.acme.quarkus.sample;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.jboss.logging.Logger;
 
 import javax.inject.Inject;
@@ -20,6 +24,8 @@ public class HeroResource {
     @Inject
     HeroService service;
 
+    @Operation(summary="returns a random hero")
+    @APIResponse(responseCode = "200",content=@Content(mediaType = MediaType.APPLICATION_JSON,schema = @Schema(implementation = Hero.class)))
     @GET
     @Path("/random")
     public Response getRandomHero() {

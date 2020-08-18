@@ -3,14 +3,20 @@ package org.acme.quarkus.sample;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import java.util.List;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
-@ApplicationScoped  
+@ApplicationScoped
 @Transactional(REQUIRED)
 public class HeroService {
+
+    @ConfigProperty(name = "level.multiplier", defaultValue = "1")
+    int levelMultiplier;
 
     @Transactional(SUPPORTS)
     public List<Hero> findAllHeroes() {
@@ -32,6 +38,7 @@ public class HeroService {
     }
 
     public Hero persistHero(@Valid Hero hero) {
+        hero.level = hero.level * levelMultiplier;
         Hero.persist(hero);
         return hero;
     }
