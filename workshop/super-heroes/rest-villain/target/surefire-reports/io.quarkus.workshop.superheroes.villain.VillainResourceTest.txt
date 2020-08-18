@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: io.quarkus.workshop.superheroes.villain.VillainResourceTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.41 s - in io.quarkus.workshop.superheroes.villain.VillainResourceTest

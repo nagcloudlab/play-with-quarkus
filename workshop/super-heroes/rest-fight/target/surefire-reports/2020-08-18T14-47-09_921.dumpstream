@@ -1,0 +1,15 @@
+# Created at 2020-08-18T14:47:09.922
+WARNING: An illegal reflective access operation has occurred
+
+# Created at 2020-08-18T14:47:09.922
+WARNING: Illegal reflective access by org.eclipse.yasson.internal.ReflectionUtils (jar:file:/Users/nag/.m2/repository/org/eclipse/yasson/1.0.7/yasson-1.0.7.jar!/) to constructor java.util.AbstractCollection()
+
+# Created at 2020-08-18T14:47:09.924
+WARNING: Please consider reporting this to the maintainers of org.eclipse.yasson.internal.ReflectionUtils
+
+# Created at 2020-08-18T14:47:09.924
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+
+# Created at 2020-08-18T14:47:09.925
+WARNING: All illegal access operations will be denied in a future release
+
