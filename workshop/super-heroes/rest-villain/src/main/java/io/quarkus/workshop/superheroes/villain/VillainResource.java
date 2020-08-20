@@ -1,6 +1,11 @@
 // tag::adocResource[]
 package io.quarkus.workshop.superheroes.villain;
 
+// end::adocResource[]
+import org.eclipse.microprofile.metrics.MetricUnits;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
+// tag::adocResource[]
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -41,6 +46,10 @@ public class VillainResource {
 
     @Operation(summary = "Returns a random villain")
     @APIResponse(responseCode = "200", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = Villain.class, required = true)))
+    // tag::adocMetrics[]
+    @Counted(name = "countGetRandomVillain", description = "Counts how many times the getRandomVillain method has been invoked")
+    @Timed(name = "timeGetRandomVillain", description = "Times how long it takes to invoke the getRandomVillain method", unit = MetricUnits.MILLISECONDS)
+    // end::adocMetrics[]
     @GET
     @Path("/random")
     public Response getRandomVillain() {
@@ -52,6 +61,10 @@ public class VillainResource {
     @Operation(summary = "Returns all the villains from the database")
     @APIResponse(responseCode = "200", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = Villain.class, type = SchemaType.ARRAY)))
     @APIResponse(responseCode = "204", description = "No villains")
+    // tag::adocMetrics[]
+    @Counted(name = "countGetAllVillains", description = "Counts how many times the getAllVillains method has been invoked")
+    @Timed(name = "timeGetAllVillains", description = "Times how long it takes to invoke the getAllVillains method", unit = MetricUnits.MILLISECONDS)
+    // end::adocMetrics[]
     @GET
     public Response getAllVillains() {
         List<Villain> villains = service.findAllVillains();
@@ -62,6 +75,10 @@ public class VillainResource {
     @Operation(summary = "Returns a villain for a given identifier")
     @APIResponse(responseCode = "200", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = Villain.class)))
     @APIResponse(responseCode = "204", description = "The villain is not found for a given identifier")
+    // tag::adocMetrics[]
+    @Counted(name = "countGetVillain", description = "Counts how many times the getVillain method has been invoked")
+    @Timed(name = "timeGetVillain", description = "Times how long it takes to invoke the getVillain method", unit = MetricUnits.MILLISECONDS)
+    // end::adocMetrics[]
     @GET
     @Path("/{id}")
     public Response getVillain(@Parameter(description = "Villain identifier", required = true) @PathParam("id") Long id) {
@@ -77,6 +94,10 @@ public class VillainResource {
 
     @Operation(summary = "Creates a valid villain")
     @APIResponse(responseCode = "201", description = "The URI of the created villain", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = URI.class)))
+    // tag::adocMetrics[]
+    @Counted(name = "countCreateVillain", description = "Counts how many times the createVillain method has been invoked")
+    @Timed(name = "timeCreateVillain", description = "Times how long it takes to invoke the createVillain method", unit = MetricUnits.MILLISECONDS)
+    // end::adocMetrics[]
     @POST
     public Response createVillain(@RequestBody(required = true, content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = Villain.class)))  @Valid Villain villain, @Context UriInfo uriInfo) {
         villain = service.persistVillain(villain);
@@ -87,6 +108,10 @@ public class VillainResource {
 
     @Operation(summary = "Updates an exiting  villain")
     @APIResponse(responseCode = "200", description = "The updated villain", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = Villain.class)))
+    // tag::adocMetrics[]
+    @Counted(name = "countUpdateVillain", description = "Counts how many times the updateVillain method has been invoked")
+    @Timed(name = "timeUpdateVillain", description = "Times how long it takes to invoke the updateVillain method", unit = MetricUnits.MILLISECONDS)
+    // end::adocMetrics[]
     @PUT
     public Response updateVillain(@RequestBody(required = true, content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = Villain.class))) @Valid Villain villain) {
         villain = service.updateVillain(villain);
@@ -96,6 +121,10 @@ public class VillainResource {
 
     @Operation(summary = "Deletes an exiting villain")
     @APIResponse(responseCode = "204")
+    // tag::adocMetrics[]
+    @Counted(name = "countDeleteVillain", description = "Counts how many times the deleteVillain method has been invoked")
+    @Timed(name = "timeDeleteVillain", description = "Times how long it takes to invoke the deleteVillain method", unit = MetricUnits.MILLISECONDS)
+    // end::adocMetrics[]
     @DELETE
     @Path("/{id}")
     public Response deleteVillain(@Parameter(description = "Villain identifier", required = true) @PathParam("id") Long id) {

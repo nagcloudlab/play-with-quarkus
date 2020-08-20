@@ -20,6 +20,7 @@ import javax.ws.rs.core.Application;
     servers = {
         @Server(url = "http://localhost:8084")
     },
+    externalDocs = @ExternalDocumentation(url = "https://github.com/quarkusio/quarkus-workshops", description = "All the Quarkus workshops"),
     tags = {
         @Tag(name = "api", description = "Public that can be used by anybody"),
         @Tag(name = "villains", description = "Anybody interested in villains")

@@ -41,6 +41,51 @@ public class VillainResourceTest {
     private static final int NB_VILLAINS = 581;
     private static String villainId;
 
+    @Test
+    void shouldPingOpenAPI() {
+        given()
+            .header(ACCEPT, APPLICATION_JSON)
+            .when().get("/openapi")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+
+    @Test
+    void shouldPingSwaggerUI() {
+        given()
+            .when().get("/swagger-ui")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+
+    // tag::adocHealth[]
+    @Test
+    void shouldPingLiveness() {
+        given()
+            .when().get("/health/live")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+
+    @Test
+    void shouldPingReadiness() {
+        given()
+            .when().get("/health/ready")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+    // end::adocHealth[]
+
+    // tag::adocMetrics[]
+    @Test
+    void shouldPingMetrics() {
+        given()
+            .header(ACCEPT, APPLICATION_JSON)
+            .when().get("/metrics/application")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+    // end::adocMetrics[]
 
     @Test
     public void testHelloEndpoint() {

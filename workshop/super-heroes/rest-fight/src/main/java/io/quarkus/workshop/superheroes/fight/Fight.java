@@ -7,14 +7,13 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 @Entity
 @Schema(description="Each fight has a winner and a loser")
 public class Fight extends PanacheEntity {
 
     @NotNull
-    public LocalDateTime fightDate;
+    public Instant fightDate;
     @NotNull
     public String winnerName;
     @NotNull

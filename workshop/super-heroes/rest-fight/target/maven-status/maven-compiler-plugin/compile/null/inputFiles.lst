@@ -3,6 +3,8 @@
 /Users/nag/Desktop/play-with-quarkus/workshop/super-heroes/rest-fight/src/main/java/io/quarkus/workshop/superheroes/fight/FightService.java
 /Users/nag/Desktop/play-with-quarkus/workshop/super-heroes/rest-fight/src/main/java/io/quarkus/workshop/superheroes/fight/client/HeroService.java
 /Users/nag/Desktop/play-with-quarkus/workshop/super-heroes/rest-fight/src/main/java/io/quarkus/workshop/superheroes/fight/Fight.java
+/Users/nag/Desktop/play-with-quarkus/workshop/super-heroes/rest-fight/src/main/java/io/quarkus/workshop/superheroes/fight/health/DatabaseConnectionHealthCheck.java
+/Users/nag/Desktop/play-with-quarkus/workshop/super-heroes/rest-fight/src/main/java/io/quarkus/workshop/superheroes/fight/health/PingFightResourceHealthCheck.java
 /Users/nag/Desktop/play-with-quarkus/workshop/super-heroes/rest-fight/src/main/java/io/quarkus/workshop/superheroes/fight/Fighters.java
 /Users/nag/Desktop/play-with-quarkus/workshop/super-heroes/rest-fight/src/main/java/io/quarkus/workshop/superheroes/fight/FightResource.java
 /Users/nag/Desktop/play-with-quarkus/workshop/super-heroes/rest-fight/src/main/java/io/quarkus/workshop/superheroes/fight/client/Hero.java

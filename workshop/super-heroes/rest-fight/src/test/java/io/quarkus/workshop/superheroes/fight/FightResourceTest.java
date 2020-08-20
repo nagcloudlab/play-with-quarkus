@@ -7,7 +7,6 @@ import io.quarkus.workshop.superheroes.fight.client.Hero;
 import io.quarkus.workshop.superheroes.fight.client.Villain;
 import io.restassured.common.mapper.TypeRef;
 import org.hamcrest.core.Is;
-import org.junit.Ignore;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -35,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 @QuarkusTestResource(DatabaseResource.class)
+@QuarkusTestResource(KafkaResource.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class FightResourceTest {
 
@@ -48,7 +48,52 @@ public class FightResourceTest {
     private static final int NB_FIGHTS = 10;
     private static String fightId;
 
-   
+    @Test
+    void shouldPingOpenAPI() {
+        given()
+            .header(ACCEPT, APPLICATION_JSON)
+            .when().get("/openapi")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+
+    @Test
+    void shouldPingSwaggerUI() {
+        given()
+            .when().get("/swagger-ui")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+
+    // tag::adocHealth[]
+    @Test
+    void shouldPingLiveness() {
+        given()
+            .when().get("/health/live")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+
+    @Test
+    void shouldPingReadiness() {
+        given()
+            .when().get("/health/ready")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+    // end::adocHealth[]
+
+    // tag::adocMetrics[]
+    @Test
+    void shouldPingMetrics() {
+        given()
+            .header(ACCEPT, APPLICATION_JSON)
+            .when().get("/metrics/application")
+            .then()
+            .statusCode(OK.getStatusCode());
+    }
+    // end::adocMetrics[]
+
     @Test
     public void testHelloEndpoint() {
         given()
@@ -103,7 +148,7 @@ public class FightResourceTest {
             .statusCode(BAD_REQUEST.getStatusCode());
     }
 
-    //@Test
+    @Test
     @Order(1)
     void shouldGetInitialItems() {
         List<Fight> fights = get("/api/fights").then()
@@ -113,7 +158,7 @@ public class FightResourceTest {
         assertEquals(NB_FIGHTS, fights.size());
     }
 
-    //@Test
+    @Test
     @Order(2)
     void shouldAddAnItem() {
         Hero hero = new Hero();
